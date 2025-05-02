@@ -28,7 +28,7 @@ def load_data(year):
 playerstats = load_data(selected_year)
 
 # Sidebar - Team selection
-sorted_unique_team = sorted(str(playerstats.Team.unique()))
+sorted_unique_team = sorted(map(str, playerstats['Team'].unique()))
 selected_team = st.sidebar.multiselect('Team', sorted_unique_team, sorted_unique_team)
 
 # Sidebar - Position selection
