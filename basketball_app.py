@@ -28,7 +28,7 @@ def load_data(year):
 playerstats = load_data(selected_year)
 
 # Sidebar - Team selection
-sorted_unique_team = sorted(playerstats.Tm.unique())
+sorted_unique_team = sorted(playerstats.Team.unique())
 selected_team = st.sidebar.multiselect('Team', sorted_unique_team, sorted_unique_team)
 
 # Sidebar - Position selection
@@ -36,7 +36,7 @@ unique_pos = ['C','PF','SF','PG','SG']
 selected_pos = st.sidebar.multiselect('Position', unique_pos, unique_pos)
 
 # Filtering data
-df_selected_team = playerstats[(playerstats.Tm.isin(selected_team)) & (playerstats.Pos.isin(selected_pos))]
+df_selected_team = playerstats[(playerstats.Team.isin(selected_team)) & (playerstats.Pos.isin(selected_pos))]
 # Convert the 'Age' column to float
 df_selected_team['Age'] = df_selected_team['Age'].astype(float)
 # Convert the fifth column to the end to float
