@@ -38,7 +38,13 @@ selected_pos = st.sidebar.multiselect('Position', unique_pos, unique_pos)
 # Filtering data
 df_selected_team = playerstats[(playerstats.Team.isin(selected_team)) & (playerstats.Pos.isin(selected_pos))]
 # Convert the 'Age' column to float
-df_selected_team['Age'] = df_selected_team['Age'].astype(float)
+# Convert 'Age' to float safely
+df_selected_team['Age'] = pd.to_numeric(df_selected_team['Age'], errors='coerce')
+
+# Convert the numeric columns (from the 5th column onward) safely
+numeric_cols = df_selected_team.columns[4:]  # All columns starting from the 5th one
+df_selected_team[numeric_cols] = df_selected_team[numeric_cols].apply(pd.to_numeric, errors='coerce')
+
 # Convert the fifth column to the end to float
 df_selected_team.iloc[:, 4:] = df_selected_team.iloc[:, 4:].astype(float)
 
