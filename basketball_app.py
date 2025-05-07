@@ -26,10 +26,9 @@ def load_data(year):
     playerstats = raw.drop(['Rk'], axis=1)
     return playerstats
 playerstats = load_data(selected_year)
-playerstats = playerstats[playerstats['Team'] != '0']
 
 # Sidebar - Team selection
-sorted_unique_team = sorted(map(str, playerstats['Team'].unique()))
+sorted_unique_team = sorted(t for t in map(str, playerstats['Team'].unique()) if t != '0')
 selected_team = st.sidebar.multiselect('Team', sorted_unique_team, sorted_unique_team)
 
 # Sidebar - Position selection
