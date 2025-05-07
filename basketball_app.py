@@ -26,6 +26,7 @@ def load_data(year):
     playerstats = raw.drop(['Rk'], axis=1)
     return playerstats
 playerstats = load_data(selected_year)
+playerstats = playerstats[playerstats['Team'] != '0']
 
 # Sidebar - Team selection
 sorted_unique_team = sorted(map(str, playerstats['Team'].unique()))
